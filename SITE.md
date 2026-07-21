@@ -2,7 +2,7 @@
 
 Handoff doc for future development. This file consolidates the original design brief, the hub restructuring prompt, and the current live architecture.
 
-**Visual reference (mandatory):** [`exampleDesign.jpg`](exampleDesign.jpg) — mood, colors, typography, copy tone. Not a layout to copy blindly.
+**Visual reference (mandatory):** [`images/exampleDesign.jpg`](images/exampleDesign.jpg) — mood, colors, typography, copy tone. Not a layout to copy blindly.
 
 **Architecture note:** The original brief described one long landing. The site is now a **hub + 3 landings** (link-in-bio pattern inspired by [davidvalmori.com](https://www.davidvalmori.com/)). Design principles, copy, palette, WhatsApp rules, and image rules still apply — redistributed across pages.
 
@@ -27,7 +27,7 @@ Handoff doc for future development. This file consolidates the original design b
 
 Evocativo, misterioso, elegante, rassicurante, interiore (ascolto, archetipi, risveglio — not fortune-telling).
 
-Avoid: miracle promises, sensationalism, aggressive language, “cartomante da fiera” tone. No Lorem Ipsum. Prefer copy faithful to `exampleDesign.jpg` where it fits.
+Avoid: miracle promises, sensationalism, aggressive language, “cartomante da fiera” tone. No Lorem Ipsum. Prefer copy faithful to `images/exampleDesign.jpg` where it fits.
 
 Tagline spirit: *I Tarocchi non predicono il futuro. Ti aiutano a ricordare chi sei.*
 
@@ -37,14 +37,17 @@ Tagline spirit: *I Tarocchi non predicono il futuro. Ti aiutano a ricordare chi 
 
 ```
 index.html          Hub (link-in-bio)
+pages/
 ├── consulenza.html Private tarot consults + testimonials
 ├── scuola.html     School benefits + lead form
 └── guida.html      Free guide request
-styles.css          Shared design system
-whatsapp-form.js    Lead form + guida CTA → prefilled WhatsApp
+styles.css          Shared design system (root)
+whatsapp-form.js    Lead form + guida CTA → prefilled WhatsApp (root)
+images/             All photos + design reference
+└── testimonianze/  Review avatars
 ```
 
-Hub pattern: compact portrait + brand + stacked destination links, night/gold aesthetic. Each subpage has `.back-link` → `index.html`.
+Hub pattern: compact portrait + brand + stacked destination links, night/gold aesthetic. Each subpage has `.back-link` → `../index.html`. From `pages/`, assets use `../styles.css`, `../whatsapp-form.js`, `../images/…`.
 
 Restructuring intent (from original prompt): same principles as the single landing; split content into consultancy / school / free guide; hub like Valmori link-in-bio.
 
@@ -57,7 +60,7 @@ Restructuring intent (from original prompt): same principles as the single landi
 - Content max width ~900–1100px (hub ~520px). Sections ~full viewport height where it fits; no huge empty voids; CTAs always visible
 - Bootstrap 5 **or** PicoCSS via CDN — project uses **Bootstrap 5** + Bootstrap Icons
 - Custom CSS in [`styles.css`](styles.css) (tokens + components)
-- **One** local JS file only: [`whatsapp-form.js`](whatsapp-form.js) — vanilla IIFE, no jQuery/React/other libs. Link with `<script src="whatsapp-form.js" defer></script>`
+- **One** local JS file only: [`whatsapp-form.js`](whatsapp-form.js) — vanilla IIFE, no jQuery/React/other libs. From root: `<script src="whatsapp-form.js" defer></script>`; from `pages/`: `src="../whatsapp-form.js"`.
 - No extra inline JS except WhatsApp-related necessity
 - Images: **local files only** — no Unsplash/Pexels/remote stock/generated placeholders; no invented paths
 - Simple CTAs: `target="_blank"` `rel="noopener noreferrer"`; do **not** use internal `#` anchors as primary CTAs
@@ -75,7 +78,7 @@ Style keywords: minimal, elegant, premium, cinematic, mysterious, mystical, clea
 
 Section rhythm: dark (black/charcoal + light text) ↔ cream/parchment (+ dark text + gold details).
 
-### Palette (align to exampleDesign.jpg — gold on black/cream, NOT purple theme)
+### Palette (align to images/exampleDesign.jpg — gold on black/cream, NOT purple theme)
 
 | Token | Value | Use |
 |-------|-------|-----|
@@ -188,35 +191,38 @@ Guide section copy/CTA must use **“richiedi”**, never **“scarica”**.
 
 ## Images (local only)
 
+All media lives under **`images/`** (testimonials in `images/testimonianze/`). HTML paths are relative from the site root, e.g. `images/photoTurbante.jpg`.
+
 ### Available files
 
 | File | Description / use |
 |------|-------------------|
-| `photoTurbante.jpg` | Warm presence / turban portrait — hub avatar + consulenza hero. Client choice for main portrait. **Do not** use Treccine/Seduta in hero slot |
-| `photoSeduta.jpg` | Consult session — consulenza strip |
-| `photoTreccine.jpg` | Portrait — scuola form support |
-| `photoScale.jpg` | Staircase / celestial portal (from exampleDesign) — scuola mystic visual |
-| `photoBook.jpg` | Esoteric book / La Luna / moth emblem / crystal — guida only visual |
-| `exampleDesign.jpg` | Design reference only (not embedded in pages) |
-| `testimonianze/matteo.jpg` | Review Matteo |
-| `testimonianze/sara.jpg` | Review Sara |
-| `testimonianze/davide.jpg` | Review Davide Pacal |
-| `testimonianze/alessia.jpg` | Review Alessia |
+| `images/photoTurbante.jpg` | Warm presence / turban portrait — hub avatar + consulenza hero. Client choice for main portrait. **Do not** use Treccine/Seduta in hero slot |
+| `images/photoSeduta.jpg` | Consult session — consulenza strip |
+| `images/photoTreccine.jpg` | Portrait — available asset (not currently used on a page) |
+| `images/photoScale.jpg` | Staircase / celestial portal (from exampleDesign) — scuola mystic visual |
+| `images/photoBook.jpg` | Esoteric book / La Luna / moth emblem / crystal — guida only visual |
+| `images/photoTarocchi.jpg` | Tarot still — scuola form support |
+| `images/exampleDesign.jpg` | Design reference only (not embedded in pages) |
+| `images/testimonianze/matteo.jpg` | Review Matteo |
+| `images/testimonianze/sara.jpg` | Review Sara |
+| `images/testimonianze/davide.jpg` | Review Davide Pacal |
+| `images/testimonianze/alessia.jpg` | Review Alessia |
 
 ### Rules
 
 - Relative paths exactly as filenames above
 - One photo per slot — no collage, inset, or two photos in the same block
-- At least **2 of 3** portraits (`photoSeduta` / `photoTreccine` / `photoTurbante`) across the site (all three OK). Current split uses all three.
+- At least **2 of 3** portraits (`photoSeduta` / `photoTreccine` / `photoTurbante`) across the site when using portrait slots. Current live pages use `photoTurbante` + `photoSeduta`; scuola support slot uses `photoTarocchi` instead of a third portrait.
 - Treatment: `object-fit: cover`; thin gold border or very light glow; no heavy frames; on mobile keep height contained so text isn’t crushed
 - Optional gold SVG halo/mandala behind portraits (graphics only — not a second photo)
 - Testimonials: real photos required — no initial-only avatars when files exist
 
 ### Historical section assignment (still the content map)
 
-1. **Hero / consulenza:** `photoTurbante.jpg` (+ optional halo)
-2. **Benefici / scuola:** `photoScale.jpg` + separate portrait slot (`photoTreccine.jpg` beside form)
-3. **Bonus / guida:** `photoBook.jpg` alone in that block
+1. **Hero / consulenza:** `images/photoTurbante.jpg` (+ optional halo)
+2. **Benefici / scuola:** `images/photoScale.jpg` + separate slot (`images/photoTarocchi.jpg` beside form)
+3. **Bonus / guida:** `images/photoBook.jpg` alone in that block
 
 ---
 
@@ -226,8 +232,14 @@ Guide section copy/CTA must use **“richiedi”**, never **“scarica”**.
 
 - Brand: Oltre i Tre Veli
 - Tagline: Scuola di Tarocchi · Ascolto interiore
-- Links: Consulenze private → `consulenza.html` · Scuola → `scuola.html` · Guida gratuita (kicker “Risorsa gratuita”) → `guida.html`
+- Links: Consulenze private → `pages/consulenza.html` · Scuola → `pages/scuola.html` · Guida gratuita (kicker “Risorsa gratuita”) → `pages/guida.html`
 - Secondary: Contattami su WhatsApp → bare wa.me
+
+**Hub visual feedback (locked):**
+- Smaller secondary text (link subs, WhatsApp line) uses **luminous gold** `#E6D3A3` (`--gold-light`), not muted beige `#A39B90`
+- Hub type sizes are **larger** overall (brand, tagline, link titles/subs)
+- Link card + avatar borders: **~2px**, always luminous gold (`--gold-light`), not the faint `gold-border` rgba
+- Avatar larger (~188px) with `object-position: center 18%` so the head is not cropped too tightly
 
 ### Consulenza — hero
 
@@ -246,7 +258,7 @@ Guide section copy/CTA must use **“richiedi”**, never **“scarica”**.
 
 - CTA: **PRENOTA IL TUO CONSULTO** → WhatsApp. Do **not** use “INIZIA IL TUO VIAGGIO” as hero CTA.
 - Micro-benefits (max 3): Percorsi trasformativi · Supporto e community · Crescita personale
-- Strip: “Come avviene il consulto” + `photoSeduta.jpg`
+- Strip: “Come avviene il consulto” + `images/photoSeduta.jpg`
 
 ### Scuola
 
@@ -274,7 +286,7 @@ Guide section copy/CTA must use **“richiedi”**, never **“scarica”**.
 - Title: **Per iniziare il tuo viaggio** / PER INIZIARE IL TUO VIAGGIO
 - Description: Richiedi la guida gratuita per iniziare a entrare in contatto con i Tarocchi e con il tuo mondo interiore.
 - Button: **RICHIEDI LA GUIDA GRATUITA** (or “Richiedi il materiale gratuito”) — id `cta-guida-gratuita`
-- Visual: `photoBook.jpg` only
+- Visual: `images/photoBook.jpg` only
 
 ### Testimonials (consulenza) — exact texts, fixed order
 
@@ -282,16 +294,16 @@ Section title **must** be: **Un’esperienza inaspettata** (subtitle optional: �
 
 CSS-only horizontal slider (`overflow-x` + `scroll-snap`). Each card: local avatar, name, IG handle+icon, ★★★★★, exact quote. IG links: `target="_blank"` `rel="noopener noreferrer"`. Do **not** invent reviews.
 
-1. **Matteo** — `testimonianze/matteo.jpg` — [@fallalibera](https://www.instagram.com/fallalibera?igsh=NGwweDhvZDZzd2t6)  
+1. **Matteo** — `images/testimonianze/matteo.jpg` — [@fallalibera](https://www.instagram.com/fallalibera?igsh=NGwweDhvZDZzd2t6)  
    *Ero molto scettico nei confronti della cartomanzia, ma grazie a Luna ho scoperto che non si tratta di qualcosa da ciarlatani, bensì di un potente strumento di conoscenza psicologica e spirituale.*
 
-2. **Sara** — `testimonianze/sara.jpg` — [@viviti_arrenditiallavita](https://www.instagram.com/viviti_arrenditiallavita?igsh=MXh1MXZ4bzk3ZDY0dA==)  
+2. **Sara** — `images/testimonianze/sara.jpg` — [@viviti_arrenditiallavita](https://www.instagram.com/viviti_arrenditiallavita?igsh=MXh1MXZ4bzk3ZDY0dA==)  
    *Farmi leggere i tarocchi da Luna mi ha aiutato in modo pratico. Perchè dopo aver individuato il problema, mi ha subito detto come risolverlo*
 
-3. **Davide Pacal** — `testimonianze/davide.jpg` — [@datti.valore.ora](https://www.instagram.com/datti.valore.ora?igsh=OThnbmhnbXlheHU1)  
+3. **Davide Pacal** — `images/testimonianze/davide.jpg` — [@datti.valore.ora](https://www.instagram.com/datti.valore.ora?igsh=OThnbmhnbXlheHU1)  
    *Luna ha la capacità di mettere chiunque a proprio agio. Mi sono sentito libero di parlarle anche di questioni importanti e molto intime, senza mai sentirmi giudicato.*
 
-4. **Alessia** — `testimonianze/alessia.jpg` — [@alessia_papetti](https://www.instagram.com/alessia_papetti?igsh=MXFsOGxzcWU5cTZzcA==)  
+4. **Alessia** — `images/testimonianze/alessia.jpg` — [@alessia_papetti](https://www.instagram.com/alessia_papetti?igsh=MXFsOGxzcWU5cTZzcA==)  
    *Grazie a Luna sono riuscita a fare chiarezza su situazioni che non riuscivo a comprendere e, soprattutto, a capire quale insegnamento potevo trarre da ciò che stavo vivendo.*
 
 ### Footer (all pages)
@@ -306,19 +318,19 @@ CSS-only horizontal slider (`overflow-x` + `scroll-snap`). Each card: local avat
 
 ### `index.html` — Hub
 
-Circular `photoTurbante.jpg` + halo · brand · tagline · 3 stacked links · WhatsApp text link · footer.
+Circular `images/photoTurbante.jpg` + halo · brand · tagline · 3 stacked links · WhatsApp text link · footer.
 
-### `consulenza.html`
+### `pages/consulenza.html`
 
 Hero (portrait, copy, benefit card, PRENOTA, micro-benefits) · consult strip + `photoSeduta` · testimonials · footer.
 
-### `scuola.html`
+### `pages/scuola.html`
 
-Intro + Scuola badge · ENTRA NELLA SCUOLA · benefits + `photoScale` + form + `photoTreccine` · footer · `whatsapp-form.js`.
+Intro + Scuola badge · ENTRA NELLA SCUOLA · benefits + `photoScale` + form + `photoTarocchi` · footer · `../whatsapp-form.js`.
 
-### `guida.html`
+### `pages/guida.html`
 
-Risorsa gratuita · title · richiedi copy · `photoBook` · `#cta-guida-gratuita` · footer · `whatsapp-form.js`.
+Risorsa gratuita · title · richiedi copy · `photoBook` · `#cta-guida-gratuita` · footer · `../whatsapp-form.js`.
 
 ---
 
@@ -326,7 +338,7 @@ Risorsa gratuita · title · richiedi copy · `photoBook` · `#cta-guida-gratuit
 
 1. Keep conversion on WhatsApp; new message templates only in `whatsapp-form.js`.
 2. Reuse tokens/classes in `styles.css`; no purple CTA themes; no Inter/Roboto/Arial as primary.
-3. New pages: link from hub; `.back-link` to `index.html`; night/cream rhythm; one idea per section.
+3. New pages: put under `pages/`; link from hub as `pages/….html`; include `.back-link` to `../index.html`; use `../` for CSS/JS/images; match night/cream rhythm; one idea per section.
 4. Italian copy consistent with tone above; keep fixed testimonials/benefits wording unless client changes them.
 5. No Privacy/Contatti footer unless client requests.
 6. Prefer editing existing HTML/CSS over new frameworks. No extra JS libraries.
@@ -343,4 +355,4 @@ Open `index.html` in a browser (or any static file server). No build step.
 | Look / layout tokens | `styles.css` |
 | Page content | relevant `.html` |
 | WA number / prefilled messages | `whatsapp-form.js` |
-| Mood reference | `exampleDesign.jpg` |
+| Mood reference | `images/exampleDesign.jpg` |

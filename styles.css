@@ -822,6 +822,10 @@ h1, h2, h3, .headline {
     var(--bg-night-alt);
 }
 
+.bonus-top--compact {
+  min-height: 0;
+}
+
 .bonus-top-grid {
   display: grid;
   gap: 2rem;
@@ -862,6 +866,132 @@ h1, h2, h3, .headline {
   aspect-ratio: 4 / 3;
   max-height: 340px;
   object-position: center;
+}
+
+/* =========================================================
+   GUIDA — sezioni contenuto
+   ========================================================= */
+.guide-section {
+  padding: clamp(3rem, 7vw, 4.5rem) 0;
+}
+
+.guide-section--cream {
+  background: var(--bg-cream);
+  color: var(--text-on-light);
+}
+
+.guide-section--night {
+  background:
+    radial-gradient(ellipse 60% 50% at 80% 20%, rgba(196, 165, 116, 0.06), transparent 55%),
+    var(--bg-night);
+  color: var(--text-on-dark);
+  border-block: 1px solid var(--border-dark);
+}
+
+.guide-section-title {
+  font-size: clamp(1.55rem, 4.2vw, 2.15rem);
+  text-align: center;
+  margin: 0 0 1rem;
+  letter-spacing: 0.04em;
+  font-weight: 600;
+}
+
+.guide-section--cream .guide-section-title {
+  color: var(--text-on-light);
+  text-transform: uppercase;
+}
+
+.guide-section--night .guide-section-title {
+  color: var(--text-on-dark);
+}
+
+.guide-section-lead {
+  max-width: 36rem;
+  margin: 0 auto 1.25rem;
+  text-align: center;
+  color: var(--muted-on-light);
+  font-size: 0.98rem;
+}
+
+.guide-section-lead--tight {
+  margin-bottom: 1.5rem;
+  color: var(--text-on-light);
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 1.05rem;
+}
+
+.guide-prose {
+  max-width: 38rem;
+  margin-inline: auto;
+  text-align: center;
+}
+
+.guide-prose p {
+  margin: 0 0 1.1rem;
+  font-size: 0.98rem;
+  line-height: 1.65;
+}
+
+.guide-section--cream .guide-prose p {
+  color: var(--muted-on-light);
+}
+
+.guide-section--night .guide-prose p {
+  color: var(--muted-on-dark);
+}
+
+.guide-prose a {
+  color: var(--gold);
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+}
+
+.guide-section--cream .guide-prose a {
+  color: var(--gold);
+}
+
+.guide-prose a:hover,
+.guide-prose a:focus-visible {
+  color: var(--gold-dark);
+}
+
+.guide-section--night .guide-prose a:hover,
+.guide-section--night .guide-prose a:focus-visible {
+  color: var(--gold-light);
+}
+
+.guide-cta-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.85rem;
+  margin-top: 1.75rem;
+}
+
+.btn-gold--ghost {
+  background: transparent;
+  color: var(--gold-light) !important;
+  border: 2px solid var(--gold-light);
+  box-shadow: none;
+}
+
+.guide-section--cream .btn-gold--ghost {
+  color: var(--gold-dark) !important;
+  border-color: var(--gold);
+  background: transparent;
+}
+
+.btn-gold--ghost:hover,
+.btn-gold--ghost:focus-visible {
+  filter: none;
+  background: rgba(196, 165, 116, 0.12);
+  color: var(--gold-dark) !important;
+}
+
+.guide-section--cream .btn-gold--ghost:hover,
+.guide-section--cream .btn-gold--ghost:focus-visible {
+  background: rgba(196, 165, 116, 0.18);
 }
 
 /* =========================================================

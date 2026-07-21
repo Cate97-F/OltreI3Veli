@@ -165,7 +165,7 @@ Edit **number and messages only in this file**. Vanilla IIFE, no dependencies. H
 |---------|----------|
 | Simple CTAs (consult, school, hub WA) | Bare `https://wa.me/393520942078` |
 | `#lead-form` submit | `preventDefault` → `reportValidity` → open WA with prefilled multiline lead message (`?text=` + `encodeURIComponent`) |
-| `#cta-guida-gratuita` | On load, set `href` to `wa.me/…?text=` encoded guide request — **must** include `?text=`, never bare wa.me for this CTA |
+| `#cta-guida-gratuita` / `.js-cta-guida` | On load, set `href` to `wa.me/…?text=` encoded guide request — **must** include `?text=`, never bare wa.me for these CTAs |
 
 Form fields: `name="nome"` / `cognome` / `email`. Form must **not** GET to wa.me. User still presses Send in WhatsApp — text is only prefilled.
 
@@ -285,8 +285,21 @@ All media lives under **`images/`** (testimonials in `images/testimonianze/`). H
 - Label (script): **Risorsa gratuita**
 - Title: **Per iniziare il tuo viaggio** / PER INIZIARE IL TUO VIAGGIO
 - Description: Richiedi la guida gratuita per iniziare a entrare in contatto con i Tarocchi e con il tuo mondo interiore.
-- Button: **RICHIEDI LA GUIDA GRATUITA** (or “Richiedi il materiale gratuito”) — id `cta-guida-gratuita`
-- Visual: `images/photoBook.jpg` only
+- Button: **RICHIEDI LA GUIDA GRATUITA** (or “Richiedi il materiale gratuito”) — id `cta-guida-gratuita` (extra repeats use class `js-cta-guida`)
+- Visual: `images/photoBook.jpg` only in the hero block
+
+#### Extra sections on `pages/guida.html` (after hero)
+
+1. **Cosa troverai nella guida** (cream / ornate) — intro + bullets:
+   - Perché i Tarocchi sono uno strumento di conoscenza di sé e non soltanto di divinazione.
+   - Il significato degli archetipi e il loro legame con la tua vita.
+   - Come iniziare a leggere i simboli anche se parti da zero.
+   - Un primo esercizio pratico per sviluppare ascolto e intuizione.
+   - Le basi per iniziare il tuo viaggio attraverso i Tarocchi.
+2. **Non è un semplice ebook** (night) — symbolism + psychology + personal growth; Arcani as mirror.
+3. **E questo è solo l’inizio…** (cream) — bridge to Scuola (`scuola.html`) + repeat guide CTA + “SCOPRI LA SCUOLA”.
+
+Intro copy for section 1: *Questa guida è pensata per accompagnarti nei tuoi primi passi…* then *Al suo interno scoprirai:* before the list.
 
 ### Testimonials (consulenza) — exact texts, fixed order
 
@@ -330,7 +343,7 @@ Intro + Scuola badge · ENTRA NELLA SCUOLA · benefits + `photoScale` + form + `
 
 ### `pages/guida.html`
 
-Risorsa gratuita · title · richiedi copy · `photoBook` · `#cta-guida-gratuita` · footer · `../whatsapp-form.js`.
+Hero (risorsa gratuita + richiedi + `photoBook`) · **Cosa troverai** (5 bullets) · **Non è un semplice ebook** · **E questo è solo l’inizio…** (link scuola + CTAs) · footer · `../whatsapp-form.js`.
 
 ---
 

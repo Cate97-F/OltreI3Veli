@@ -8,6 +8,7 @@
   var WHATSAPP_NUMBER = "393520942078";
   var FORM_ID = "lead-form";
   var GUIDE_CTA_ID = "cta-guida-gratuita";
+  var GUIDE_CTA_CLASS = "js-cta-guida";
 
   var GUIDE_REQUEST_MESSAGE =
     "ciao Luna, vorrei avere la guida gratuita sui tarocchi marsigliesi";
@@ -65,9 +66,14 @@
       });
     }
 
+    var guideHref = whatsappUrl(GUIDE_REQUEST_MESSAGE);
     var guideCta = document.getElementById(GUIDE_CTA_ID);
     if (guideCta) {
-      guideCta.setAttribute("href", whatsappUrl(GUIDE_REQUEST_MESSAGE));
+      guideCta.setAttribute("href", guideHref);
+    }
+    var guideCtas = document.querySelectorAll("." + GUIDE_CTA_CLASS);
+    for (var i = 0; i < guideCtas.length; i++) {
+      guideCtas[i].setAttribute("href", guideHref);
     }
   });
 })();

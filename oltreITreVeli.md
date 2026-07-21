@@ -393,11 +393,12 @@ Bullet benefici (massimo 5 — usa questi, in questo ordine):
 4. TRASFORMAZIONE — Un viaggio che ti insegna ad ascoltarti davvero e manifestare la tua luce nel mondo.
 5. UN PERCORSO PER OGNI ANIMA — Adatto a principianti, appassionati e a chiunque senta il richiamo di un viaggio di conoscenza interiore e di studiare in modo diverso i tarocchi.
 
-CTA intermedie (esempi coerenti col design — tutte su WhatsApp):
+CTA intermedie (su WhatsApp):
 
-- INIZIA IL TUO VIAGGIO
-- ENTRA NELLA SCUOLA
-- ENTRA ANCHE TU NELLA NOSTRA COMMUNITY
+- ENTRA NELLA SCUOLA  (unica CTA intermedia dopo l’Hero / prima dei benefici)
+
+NON includere il pulsante "ENTRA ANCHE TU NELLA NOSTRA COMMUNITY"
+(né una seconda CTA intermedia tra benefici e sezione bonus).
 
 Ogni CTA semplice → https://wa.me/393520942078 (target _blank)
 Form lead → whatsapp-form.js apre wa.me con ?text= precompilato (vedi sezione WhatsApp)
@@ -733,14 +734,10 @@ Foto di supporto in questa sezione:
 - Non rompere il layout a due colonne benefici + form.
 
 --------------------------------------------------
-CTA INTERMEDIA
-
-Nuovamente un pulsante ben visibile.
-
-Testo suggerito: ENTRA ANCHE TU NELLA NOSTRA COMMUNITY
-
---------------------------------------------------
 SEZIONE BONUS
+
+(NON inserire una CTA intermedia "ENTRA ANCHE TU NELLA NOSTRA COMMUNITY"
+tra la sezione benefici e questa sezione.)
 
 Dividi la schermata in due metà.
 

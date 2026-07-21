@@ -112,7 +112,7 @@ REGOLE TECNICHE
 
 Genera questi file nella stessa cartella:
 
-1. oltreITreVeli.html  (landing)
+1. index.html  (landing)
 2. whatsapp-form.js    (OBBLIGATORIO — gestione form → WhatsApp)
 
 Puoi utilizzare:
@@ -834,6 +834,6 @@ OUTPUT
 
 Genera nella stessa cartella:
 
-1. oltreITreVeli.html
+1. index.html
 2. whatsapp-form.js  (form lead + CTA guida gratuita → messaggi WhatsApp precompilati)
    e linkalo nell’HTML: <script src="whatsapp-form.js" defer></script>
